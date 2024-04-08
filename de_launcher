@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [[ $(tty) != "/dev/tty1" ]]; then
+  exit 0
+fi
+
+read session
+case $session in
+hyprland)
+  Hyprland
+  ;;
+kde)
+  dbus-run-session startplasma-wayland
+  ;;
+poweroff) poweroff ;;
+reboot) reboot ;;
+uefi) systemctl reboot --firmware-setup ;;
+esac

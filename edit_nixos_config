@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+nvim /home/areo/.config/nixos/flake.nix
+
+execute_as_sudo() {
+  nixos-rebuild switch --flake /home/areo/.config/nixos#home-machine
+} 
+
+if [ "$EUID" -ne 0 ]; then
+    FUNC=$(declare -f execute_as_sudo)
+    echo "The following action requires sudo privileges. Please enter your password:"
+    sudo bash -c "$FUNC; execute_as_sudo"
+else
+    execute_as_sudo
+fi
+
+if [ $? -eq 0 ]; then
+    notify-send "NixOs" "Rebuild successful"
+else
+    notify-send "NixOs" "Rebuild failed"
+fi
+
+echo 'Press Enter to exit'
+read
