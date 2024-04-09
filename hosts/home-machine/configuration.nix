@@ -9,6 +9,8 @@
       ./hardware-configuration.nix
       ../../modules/nixos/bootloader.nix
       ../../modules/nixos/hyprland.nix
+      ../../modules/nixos/zsh.nix
+      ../../modules/nixos/packages.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -84,53 +86,7 @@ boot.kernel.sysctl = {
     home = "/home/" + spec.user;
     initialPassword = "q";
     extraGroups = [ "wheel" "users" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      chromium
-      mpv
-      okular
-      zellij
-      nsxiv
-      pdfarranger
-      gromit-mpx
-      # networkmanagerapplet
-      discord
-      telegram-desktop
-      aerc
-      android-file-transfer
-      audacity
-      asciinema
-      ascii
-      biber
-      texliveFull
-      obs-studio
-      gimp
-      inkscape
-      lazygit
-      # imagemagick
-    ];
   };
-
-  nixpkgs.config.allowUnfree = true; 
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vifm
-    ueberzugpp
-    ffmpegthumbnailer
-    atool
-    unzip
-    killall
-    gcc
-    git
-    stow
-    neovim # can later be removed
-    wget
-    starship
-    htop
-    ripgrep
-    font-manager
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -139,10 +95,6 @@ boot.kernel.sysctl = {
     enable = true;
     enableSSHSupport = true;
   };
-
-  fonts.packages = with pkgs; [
-    iosevka
-  ];
 
 
   users.defaultUserShell = pkgs.zsh;
