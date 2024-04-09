@@ -2,20 +2,19 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, spec, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/nixos/bootloader.nix
-      ../../modules/nixos/hyprland.nix
-      ../../modules/nixos/kde.nix
       ../../modules/nixos/packages.nix
       ../../modules/nixos/user.nix
       ../../modules/nixos/sound.nix
       ../../modules/nixos/shell.nix
       ../../modules/nixos/fonts.nix
-    ];
+    ] ++ (if (builtins.elem "hyprland" spec.desktop_environments) then [../../modules/nixos/hyprland.nix] else [])
+      ++ (if (builtins.elem "kde" spec.desktop_environments) then [../../modules/nixos/kde.nix] else []);
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

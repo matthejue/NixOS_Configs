@@ -14,6 +14,7 @@
     spec = {
       user = "areo";
       disable_os_prober = true;
+      desktop_environments = ["hyprland" "kde"];
     };
   in {
     nixosConfigurations = {
