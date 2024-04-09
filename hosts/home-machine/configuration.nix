@@ -127,9 +127,9 @@ boot.kernel.sysctl = {
     neovim # can later be removed
     wget
     starship
-    font-manager
     htop
     ripgrep
+    font-manager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -144,15 +144,6 @@ boot.kernel.sysctl = {
     iosevka
   ];
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-    promptInit = ''
-      eval "$(${pkgs.starship}/bin/starship init zsh)"
-    '';
-  };
 
   users.defaultUserShell = pkgs.zsh;
   # users.users.${spec.user}.shell = pkgs.zsh;

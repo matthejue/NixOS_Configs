@@ -12,5 +12,6 @@
   };
 }
 
-# The --install-bootloader option is required if one wants to (re)install the boot loader on the device specified by your configuration. Without this option, it will not reinstall the bootloader. 
+# The --install-bootloader option is required if one wants to (re)install the boot loader on the device specified by your configuration. Without this option, it will not reinstall the bootloader
 # Most of the time, when one runs nixos-rebuild switch, it will just update the bootloader menu to include the new configuration, without reinstalling the entire bootloader
+# if one had previously detected other operating systems and added their entries to the GRUB menu, those existing entries will remain. Setting useOSProber to false will not remove those entries automatically
