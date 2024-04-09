@@ -9,7 +9,13 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, ... }: 
+  let 
+    spec = {
+      user = "areo";
+      disable_os_prober = true;
+    };
+  in {
     nixosConfigurations = {
       home-machine = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -21,10 +27,15 @@
             home-manager.useUserPackages = true;
             home-manager.users.areo = import ./modules/home-manager/home.nix;
 
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
+            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
+            home-manager.extraSpecialArgs = {
+              inherit spec;
+            };
           }
         ];
+        specialArgs = {
+          inherit spec;
+        };
       };
     };
   };

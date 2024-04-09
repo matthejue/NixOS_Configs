@@ -2,13 +2,13 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, spec, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
+  imports = [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./bootloader.nix
+      ../../modules/nixos/bootloader.nix
+      ../../modules/nixos/hyprland.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -33,28 +33,12 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   };
 
-  programs.hyprland = {
-    enable = true;
-    # enableNvidiaPatches = true;
-    xwayland.enable = true;
-  };
-  
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
-  };
-
-  hardware = {
-    opengl.enable = true;
-    nvidia.modesetting.enable = true;
-  };
-
   services.desktopManager.plasma6.enable = true;
 
 environment.sessionVariables = {
     EDITOR = "nvim";
     # PATH = "$PATH:/path/to/your/directory";
-    PATH = ["$PATH" "/home/areo/.config/vifm/scripts/vifmimg" "/home/areo/.config/nixos"];
+    PATH = ["$PATH" "/home/${spec.user}/.config/vifm/scripts/vifmimg" "/home/${spec.user}/.config/nixos"];
 };
 
   # Enable the X11 windowing system.
@@ -95,9 +79,9 @@ boot.kernel.sysctl = {
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.areo = {
+  users.users."${spec.user}" = {
     isNormalUser = true;
-    home = "/home/areo";
+    home = "/home/" + spec.user;
     initialPassword = "q";
     extraGroups = [ "wheel" "users" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
@@ -122,6 +106,7 @@ boot.kernel.sysctl = {
       gimp
       inkscape
       lazygit
+      # imagemagick
     ];
   };
 
@@ -130,40 +115,20 @@ boot.kernel.sysctl = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    killall
-    gcc
-    git
-    stow
-    neovim
-    wev
-    alacritty
-    wget
-    # eww-wayland
-    waybar
-    hyprpaper
-    mpvpaper
-    wofi
-    dunst
-    libnotify
-    copyq
-    wl-clipboard
-    wallust
-    starship
-    unzip
-    # flameshot
-    playerctl
-    font-manager
-    wl-clipboard
     vifm
     ueberzugpp
     ffmpegthumbnailer
     atool
-    brightnessctl
+    unzip
+    killall
+    gcc
+    git
+    stow
+    neovim # can later be removed
+    wget
+    starship
+    font-manager
     htop
-    grim
-    slurp
-    swappy
-    imagemagick
     ripgrep
   ];
 
@@ -190,9 +155,9 @@ boot.kernel.sysctl = {
   };
 
   users.defaultUserShell = pkgs.zsh;
-  # users.users.areo.shell = pkgs.zsh;
+  # users.users.${spec.user}.shell = pkgs.zsh;
   environment.shellAliases = {
-    nrs = "sudo nixos-rebuild switch --flake /home/areo/.config/nixos#home-machine";
+    nrs = "sudo nixos-rebuild switch --flake /home/${spec.user}/.config/nixos#home-machine";
     ncg = "sudo nix-collect-garbage";
   };
   environment.loginShellInit = builtins.readFile ../../de_launcher;
