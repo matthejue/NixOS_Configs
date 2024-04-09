@@ -1,5 +1,5 @@
 
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, spec, ... }:
 
 {
   users.users."${spec.user}".packages = with pkgs; [
