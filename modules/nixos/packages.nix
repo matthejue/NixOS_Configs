@@ -25,6 +25,8 @@
       inkscape
       lazygit
       # imagemagick
+      prismlauncher
+      steam
     ];
 
   nixpkgs.config.allowUnfree = true; 
