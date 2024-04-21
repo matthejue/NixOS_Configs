@@ -6,10 +6,16 @@
     ];
 
   users.defaultUserShell = pkgs.zsh;
-  # users.users.${spec.user}.shell = pkgs.zsh;
 
   environment.sessionVariables = {
       EDITOR = "nvim";
+      # Zsh uses its own line editor called the Zsh Line Editor (ZLE), which
+      # has both an Emacs mode and a vi mode. 
+      # If the VISUAL or EDITOR environment variables contain the string "vi",
+      # then vi mode will be used by default in ZLE. Otherwise, it will default
+      # to Emacs mode. 
+      # To explicitly set the vi mode in zsh, you can use the command bindkey
+      # -v. This will enable the vi editing mode in the global keymap 
       # PATH = "$PATH:/path/to/your/directory";
       PATH = ["$PATH" "/home/${spec.user}/.config/vifm/scripts/vifmimg" "/home/${spec.user}/.config/nixos"];
   };

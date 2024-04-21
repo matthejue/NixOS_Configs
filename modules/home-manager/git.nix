@@ -3,12 +3,13 @@
 {
   programs.git = {
     enable = true;
-    userName = "Areotwister"
-    userEmail = "areotwister@gmail.com"
+    userName = "areotwister";
+    userEmail = "areotwister@gmail.com";
     aliases = {
       gc = "commit";
       gl = "pull";
       gp = "push";
+      gst = "status";
     };
   };
 }

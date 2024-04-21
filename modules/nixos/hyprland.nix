@@ -22,10 +22,11 @@
 
   environment.systemPackages = with pkgs; [
     alacritty
+    hyprpaper
+    hyprshade
     wev
     # eww-wayland
     waybar
-    hyprpaper
     mpvpaper
     # wofi
     bemenu

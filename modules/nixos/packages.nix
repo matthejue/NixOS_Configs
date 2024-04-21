@@ -50,6 +50,8 @@
     htop
     ripgrep
     nix-index
+    nix-prefetch-github
+    coreutils
   ];
 }
 
