@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# best to use with space_replacer.py because spaces in the videoname can cause
+# problems
+
+if [[ -f ~/.config/hypr/background.mp4 ]]; then
+  rm ~/.config/hypr/background.mp4
+fi
+if [[ -f ~/.config/hypr/background.png ]]; then
+  rm ~/.config/hypr/background.png
+fi
+if [[ -f ~/.config/hypr/background.jpg ]]; then
+  rm ~/.config/hypr/background.jpg
+fi
+
+rm -r ~/.cache/wallust/
+
+if [[ "$1" == *.mp4 ]]; then
+  cp "$1" ~/.config/hypr/background.mp4
+  ffmpeg -i "$1" -ss 00:00:01.000 -f image2 -vframes 1 ~/.config/hypr/background.png
+elif [[ "$1" == *.png ]]; then
+  cp "$1" ~/.config/hypr/background.png
+elif [[ "$1" == *.jpg ]]; then
+  cp "$1" ~/.config/hypr/background.jpg
+fi
+
+if [[ -f ~/.config/hypr/background.png ]]; then
+  hyprctl hyprpaper unload "/home/areo/.config/hypr/background.png"
+  hyprctl hyprpaper preload "/home/areo/.config/hypr/background.png"
+  hyprctl hyprpaper wallpaper "HDMI-A-1, /home/areo/.config/hypr/background.png"
+  wallust -a 80 ~/.config/hypr/background.png
+elif [[ -f ~/.config/hypr/background.jpg ]]; then
+  hyprctl hyprpaper unload "/home/areo/.config/hypr/background.jpg"
+  hyprctl hyprpaper preload "/home/areo/.config/hypr/background.jpg"
+  hyprctl hyprpaper wallpaper "HDMI-A-1, /home/areo/.config/hypr/background.jpg"
+  wallust -a 80 ~/.config/hypr/background.jpg
+fi
+
+if [[ -f ~/.config/hypr/background.png ]]; then
+  name=$(echo $1 | sed 's/\//\n/g'| tail -n 1)
+  notify-send --icon ~/.config/hypr/background.png "Wallpaper changed" "$name"
+elif [[ -f ~/.config/hypr/background.jpg ]]; then
+  name=$(echo $1 | sed 's/\//\n/g'| tail -n 1)
+  notify-send --icon ~/.config/hypr/background.jpg "Wallpaper changed" "$name"
+fi
+
+animatedWallpaperState="off"
+typeset -p animatedWallpaperState > ~/.config/hypr/animatedWallpaperState

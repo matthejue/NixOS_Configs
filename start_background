@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+. ~/.config/hypr/animatedWallpaperState
+case $animatedWallpaperState in
+  on)
+    animatedWallpaperState="off"
+    typeset -p animatedWallpaperState > ~/.config/hypr/animatedWallpaperState
+
+    pkill mpvpaper
+    ;;
+  off)
+    animatedWallpaperState="on"
+    typeset -p animatedWallpaperState > ~/.config/hypr/animatedWallpaperState
+
+    mpvpaper -vs -o "no-audio loop osd-level=0 no-input-default-bindings" HDMI-A-1 /home/areo/.config/hypr/background.mp4
+    ;;
+esac

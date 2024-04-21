@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+wallust /home/areo/.config_stow/hypr/.config/hypr/background.png
+waybar &
+hyprpaper -c /home/areo/.config/hypr/hyprpaper_ref.conf &
+dunst &
+copyq &
+# flameshot &

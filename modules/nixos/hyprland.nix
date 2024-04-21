@@ -40,5 +40,6 @@
     grim
     slurp
     swappy
+    ffmpeg
   ];
 }

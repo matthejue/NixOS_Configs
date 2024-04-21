@@ -27,6 +27,7 @@
       # imagemagick
       prismlauncher
       steam
+      neofetch
     ];
 
   nixpkgs.config.allowUnfree = true; 
@@ -48,6 +49,7 @@
     starship
     htop
     ripgrep
+    nix-index
   ];
 }
 
