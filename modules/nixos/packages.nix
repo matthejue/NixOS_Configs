@@ -42,7 +42,7 @@
     unzip
     killall
     gcc
-    git
+    # git
     stow
     neovim # can later be removed
     wget

@@ -5,7 +5,9 @@
       ../../modules/nixos/zsh.nix
     ];
 
-  users.defaultUserShell = pkgs.zsh;
+  # users.defaultUserShell = pkgs.zsh;
+  users.users.${spec.user}.shell = pkgs.zsh;
+  environment.shells = with pkgs; [ zsh ];
 
   environment.sessionVariables = {
       EDITOR = "nvim";
