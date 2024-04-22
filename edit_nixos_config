@@ -6,18 +6,34 @@ execute_as_sudo() {
   nixos-rebuild switch --flake /home/areo/.config/nixos#home-machine
 } 
 
-if [ "$EUID" -ne 0 ]; then
+rebuild=""
+echo "Rebuild Home (h) or NixOS (n) or both (hn)?"
+read rebuild
+
+if [[ "$rebuild" == *"h"* ]]; then
+  home-manager switch --flake /home/areo/.config/nixos#areo  
+
+  if [ $? -eq 0 ]; then
+    notify-send "Home-Manager" "Rebuild successful"
+  else
+    notify-send "Home-Manager" "Rebuild failed"
+  fi
+fi 
+
+if [[ "$rebuild" == *"n"* ]]; then
+  if [ "$EUID" -ne 0 ]; then
     FUNC=$(declare -f execute_as_sudo)
     echo "The following action requires sudo privileges. Please enter your password:"
     sudo bash -c "$FUNC; execute_as_sudo"
-else
+  else
     execute_as_sudo
-fi
+  fi
 
-if [ $? -eq 0 ]; then
+  if [ $? -eq 0 ]; then
     notify-send "NixOs" "Rebuild successful"
-else
+  else
     notify-send "NixOs" "Rebuild failed"
+  fi
 fi
 
 echo 'Press Enter to exit'
