@@ -15,6 +15,7 @@
       ../../modules/nixos/shell.nix
       ../../modules/nixos/fonts.nix
       ../../modules/nixos/misc.nix
+      ../../modules/nixos/xremap.nix
     ] ++ (if (builtins.elem "hyprland" spec.desktop_environments) then [../../modules/nixos/hyprland.nix] else [])
       ++ (if (builtins.elem "kde" spec.desktop_environments) then [../../modules/nixos/kde.nix] else []);
 }

@@ -25,6 +25,7 @@
         inherit system;
         modules = [
           ./hosts/home-machine/configuration.nix
+          xremap-flake.nixosModules.default
         ];
         specialArgs = {
           inherit spec;
@@ -36,7 +37,6 @@
         pkgs = nixpkgs.legacyPackages.${system};
         modules = [
           ./modules/home-manager/home.nix
-          xremap-flake.nixosModules.default
         ];
         # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
         extraSpecialArgs = {
