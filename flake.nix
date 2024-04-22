@@ -7,10 +7,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # when accidently removing git: nix shell nixpkgs#git -c nixos-rebuild switch --flake /home/areo/.config/nixos#home-machine
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: 
   let 
+    system = "x86_64-linux";
     spec = {
       user = "areo";
       disable_os_prober = true;
@@ -19,22 +21,23 @@
   in {
     nixosConfigurations = {
       home-machine = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         modules = [
           ./hosts/home-machine/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.areo = import ./modules/home-manager/home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
-            home-manager.extraSpecialArgs = {
-              inherit spec;
-            };
-          }
         ];
         specialArgs = {
+          inherit spec;
+        };
+      };
+    };
+    homeConfigurations = {
+      areo = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules = [
+          ./modules/home-manager/home.nix 
+        ];
+        # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
+        extraSpecialArgs = {
           inherit spec;
         };
       };
