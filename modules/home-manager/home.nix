@@ -5,6 +5,7 @@
     ./neovim.nix
     ./zsh.nix
     ./git.nix
+    ./chromium.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -82,10 +83,4 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  # Chromium
-  programs.chromium.enable = true;
-  programs.chromium.extensions = [
-    { id = "gjoijpfmdhbjkkgnmahganhoinjjpohk"; }
-  ];
 }

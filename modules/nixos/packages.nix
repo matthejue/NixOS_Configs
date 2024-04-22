@@ -28,6 +28,7 @@
       prismlauncher
       steam
       neofetch
+      cmus
     ];
 
   nixpkgs.config.allowUnfree = true; 
