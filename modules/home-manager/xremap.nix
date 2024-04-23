@@ -1,16 +1,16 @@
 { config, lib, pkgs, spec, ... }:
 
 {
-  hardware.uinput.enable = true;
-  users.groups.uinput.members = [ "areo" ];
-  users.groups.input.members = [ "areo" ];
+  # hardware.uinput.enable = true;
+  # users.groups.uinput.members = [ "areo" ];
+  # users.groups.input.members = [ "areo" ];
 
   services.xremap = {
     enable = true;
     withWlroots = true;
     userName = "areo";
     watch = true;
-    # serviceMode = "user";
+    serviceMode = "user";
     # withHypr = true;
     yamlConfig = ''
       virtual_modifiers:
