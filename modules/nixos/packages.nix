@@ -29,6 +29,7 @@
       steam
       neofetch
       cmus
+      hardinfo
     ];
 
   nixpkgs.config.allowUnfree = true; 
@@ -53,6 +54,7 @@
     nix-index
     nix-prefetch-github
     coreutils
+    python3
   ];
 }
 
