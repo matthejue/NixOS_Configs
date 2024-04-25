@@ -24,7 +24,6 @@
       home-machine = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          xremap-flake.nixosModules.default
           ./hosts/home-machine/configuration.nix
         ];
         specialArgs = {
@@ -36,7 +35,6 @@
       areo = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         modules = [
-          # xremap-flake.homeManagerModules.default
           ./modules/home-manager/home.nix
         ];
         # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix

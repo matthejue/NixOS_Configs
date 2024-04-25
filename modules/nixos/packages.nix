@@ -55,6 +55,8 @@
     nix-prefetch-github
     coreutils
     python3
+    kmonad
+    evtest
   ];
 }
 
