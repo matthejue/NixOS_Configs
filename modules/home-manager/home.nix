@@ -6,6 +6,8 @@
     ./zsh.nix
     ./git.nix
     ./chromium.nix
+    ./kmonad_opts.nix
+    ./kmonad.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

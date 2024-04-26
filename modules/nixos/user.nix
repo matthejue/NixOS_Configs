@@ -10,6 +10,6 @@
     isNormalUser = true;
     home = "/home/" + spec.user;
     initialPassword = "q";
-    extraGroups = [ "wheel" "users" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "users" "input" "uinput" ]; # Enable ‘sudo’ for the user.
   };
 }
