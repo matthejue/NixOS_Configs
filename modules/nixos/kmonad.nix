@@ -70,7 +70,7 @@
   @st  Q    W    E    R    T    Z    U    I    O    P    |     *    ret   del  end  pgdn  kp7  kp8  kp9  kp+
   caps A    S    D    F    G    H    J    K    L    ]    }    '                          kp4  kp5  kp6
   lsft >    Y    X    C    V    B    N    M    ;    :    \_   rsft            up         kp1  kp2  kp3  kprt
-  lctl lmet lalt           spc                 ralt rmet cmp  rctl       left down rght  kp0  kp.
+  lctl lmet lalt          S-spc                 ralt rmet cmp  rctl       left down rght  kp0  kp.
 )
 
 (deflayer super

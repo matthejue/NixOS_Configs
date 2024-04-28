@@ -8,20 +8,29 @@
     syntaxHighlighting.enable = true;
     autocd = true;
     dotDir = ".config/zsh";
-    plugins = [
-      {
-        name = "zsh-z";
-        src = pkgs.fetchFromGitHub {
-          owner = "agkozak";
-          repo = "zsh-z";
-          rev = "afaf2965b41fdc6ca66066e09382726aa0b6aa04";
-          hash = "sha256-FnGjp/VJLPR6FaODY0GtCwcsTYA4d6D8a6dMmNpXQ+g=";
-        };
-      }
-    ];
+    shellAliases = {
+      gaa = "git add --all";
+      gca = "git commit -a";
+      gp = "git push";
+      gl = "git pull";
+      gcl = "git clone";
+    };
 
     initExtra = ''
-      source ${pkgs.zsh-z}/share/zsh-z/zsh-z.plugin.zsh
+      # for folder navigation
+      autoload -Uz compinit
+      compinit -u
+      zstyle ':completion:*' menu select
     '';
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }

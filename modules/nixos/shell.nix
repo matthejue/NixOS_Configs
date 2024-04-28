@@ -10,7 +10,7 @@
   environment.shells = with pkgs; [ zsh ];
 
   environment.sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "nvim"; # enables vi-mode in zsh
       # Zsh uses its own line editor called the Zsh Line Editor (ZLE), which
       # has both an Emacs mode and a vi mode. 
       # If the VISUAL or EDITOR environment variables contain the string "vi",
