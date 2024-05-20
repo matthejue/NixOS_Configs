@@ -32,7 +32,7 @@
   rft  (tap-next-release rsft (layer-toggle shifted))
   agr  (tap-next-release ralt (layer-toggle altgr))  
   aft  (tap-next-release (around ralt lsft) (layer-toggle altgrshift)) 
-  mpr  (tap-next-release lmet (layer-toggle super))  
+  mpr  (around (layer-toggle super) lmet)  
   spr  (tap-next-release lmet (layer-toggle supershifted))
   sp1  M-S-1
   sp2  M-S-2
@@ -54,6 +54,7 @@
   st   (around lshift tab)
   clt  C-left
   crt  C-right
+  mmd  (tap-next-release lmet lmet)
   ü    #(ralt " u)
   ö    #(ralt " o)
   ä    #(ralt " a)
